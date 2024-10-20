@@ -1,16 +1,37 @@
-public class Park {
-    public class Attraction {
-        private String name;        
-        private String workingTime; 
-        private double price;      
+import java.util.ArrayList;
+import java.util.List;
 
-        // Конструктор 
+public class Park {
+    private String name;
+    private List<Attraction> attractions;
+
+    public Park(String name) {
+        this.name = name;
+        this.attractions = new ArrayList<>();
+    }
+
+    public void addAttraction(String name, String workingHours, double price) {
+        this.attractions.add(new Attraction(name, workingHours, price));
+    }
+
+    public void displayAttractions() {
+        System.out.println("Park: " + name);
+        for (Attraction attraction : attractions) {
+            attraction.printInfo();
+        }
+    }
+
+    private class Attraction {
+        private String name;
+        private String workingTime;
+        private double price;
+
         public Attraction(String name, String workingTime, double price) {
             this.name = name;
             this.workingTime = workingTime;
             this.price = price;
         }
-        
+
         public void printInfo() {
             System.out.println("Attraction Name: " + name);
             System.out.println("Working Hours: " + workingTime);
@@ -18,13 +39,4 @@ public class Park {
         }
     }
 
-    public static void main(String[] args) {
-        Park park = new Park();
-
-        Park.Attraction rollerCoaster = park.new Attraction("Roller Coaster", "10:00 - 18:00", 500);
-        Park.Attraction ferrisWheel = park.new Attraction("Ferris Wheel", "08:00 - 20:00", 400);
-
-        rollerCoaster.printInfo();
-        ferrisWheel.printInfo();
-    }
 }
